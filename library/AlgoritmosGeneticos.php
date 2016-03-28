@@ -136,7 +136,7 @@ class AlgoritmosGeneticos {
         if (count($this->populacao) > 0) {
             $this->ordenarPopulacaoMaiorMenor();
             foreach ($this->populacao AS $cromossomo) {
-                if ($cromossomo->getVolume() <= 125 && $cromossomo->getPeso() <= 125) {
+                if ($cromossomo->getVolume() <= $cromossomo::VOLUME_MAXIMO && $cromossomo->getPeso() <= $cromossomo::PESO_MAXIMO) {
                     return $cromossomo;
                 }
             }

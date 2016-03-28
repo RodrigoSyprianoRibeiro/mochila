@@ -92,8 +92,8 @@
                                 <h2>Mochila</h2>
                                 <div class="knob-label">Itens selecionados</div>
                                 <div id="quadro"></div>
-                                <h4>Volume: <b id="volume">0</b> / <b>125</b></h4>
-                                <h4>Peso: <b id="peso">0</b> / <b>125</b></h4>
+                                <h4>Volume: <b id="volume">0</b> / <b>80</b></h4>
+                                <h4>Peso: <b id="peso">0</b> / <b>80</b></h4>
                                 <h4>Valor: <b id="valor">0</b></h4>
                             </div>
                             <div class="col-sm-3 wow fadeIn text-center padding" data-wow-duration="500ms" data-wow-delay="300ms">

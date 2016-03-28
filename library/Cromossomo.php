@@ -2,8 +2,8 @@
 
 class Cromossomo
 {
-    const VOLUME_MAXIMO = 125;
-    const PESO_MAXIMO = 125;
+    const VOLUME_MAXIMO = 80;
+    const PESO_MAXIMO = 80;
 
     public $vetor;
     public $volume;
