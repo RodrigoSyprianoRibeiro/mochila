@@ -157,8 +157,8 @@ $(function () {
 
   $("#quantidade_geracoes").ionRangeSlider({
     min: 0,
-    max: 100,
-    from: 20,
+    max: 20,
+    from: 10,
     type: 'single',
     step: 1,
     postfix: " gerações",
