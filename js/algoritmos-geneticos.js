@@ -146,8 +146,8 @@ $(function () {
 
   $("#populacao_inicial").ionRangeSlider({
     min: 0,
-    max: 500,
-    from: 20,
+    max: 20,
+    from: 10,
     type: 'single',
     step: 10,
     postfix: " indivíduos",
