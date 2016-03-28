@@ -149,7 +149,7 @@ $(function () {
     max: 20,
     from: 10,
     type: 'single',
-    step: 10,
+    step: 1,
     postfix: " indivíduos",
     prettify: false,
     hasGrid: true
