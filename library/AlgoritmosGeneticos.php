@@ -66,18 +66,16 @@ class AlgoritmosGeneticos {
     }
 
     public function geraPopulacaoCrossover() {
+
+        shuffle($this->populacao);
+
         $quantidadeCrossover = round(count($this->populacao) * $this->quantidadeCrossover);
         $totalCrossover = ($quantidadeCrossover % 2 == 0) ? $quantidadeCrossover : $quantidadeCrossover - 1;
 
         $populacaoCrossover = array();
-        while ($totalCrossover > 0) {
-
-            $numeroAleatorio = rand(0, count($this->populacao)-1);
-            array_push($populacaoCrossover, $this->populacao[$numeroAleatorio]);
-            unset($this->populacao[$numeroAleatorio]);
-            sort($this->populacao);
-
-            $totalCrossover--;
+        for ($i = 0; $i < $totalCrossover; $i++) {
+            array_push($populacaoCrossover, $this->populacao[$i]);
+            unset($this->populacao[$i]);
         }
         return $populacaoCrossover;
     }
@@ -88,7 +86,7 @@ class AlgoritmosGeneticos {
         $cromossomoFilho2 = new Cromossomo($this->geracaoAtual);
 
         $tamanhoListaArtigos = count($this->listaArtigos);
-        $pontosCorte = Util::gerarNumerosAleatoriosDiferentes(1, $tamanhoListaArtigos - 1, 2, 'ASC');
+        $pontosCorte = Util::gerarNumerosAleatoriosDiferentes(2, $tamanhoListaArtigos - 2, 2, 'ASC');
 
         for ($i = 0; $i < $tamanhoListaArtigos; $i++) {
             if ($i >= $pontosCorte[0] && $i < $pontosCorte[1]) {
