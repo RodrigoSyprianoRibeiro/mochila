@@ -23,8 +23,8 @@ class Cromossomo
         $this->mutante = false;
     }
 
-    public function gerarVetor($tamanhoListaArtigos) {
-        for ($i = 0; $i < $tamanhoListaArtigos; $i++) {
+    public function gerarVetor($tamanho) {
+        for ($i = 0; $i < $tamanho; $i++) {
             $this->vetor[] = rand(0, 1);
         }
     }
@@ -40,13 +40,13 @@ class Cromossomo
         }
     }
 
-    public function calcularAptidaoTempoVida() {
+    public function calcularAptidaoTempoVida($geracoes) {
         $diferenca = Util::calcularDiferencaEntrePontos($this->volume, $this->peso, self::VOLUME_MAXIMO, self::PESO_MAXIMO) / $this->diferencaMaxima;
         if ($this->volume > self::VOLUME_MAXIMO || $this->peso > self::PESO_MAXIMO) {
             $diferenca *= 2;
         }
-        $this->aptidao = $this->valor - $this->valor * $diferenca;
-        $this->tempoVida = ceil($this->aptidao / 2);
+        $this->aptidao = ceil($this->valor - $this->valor * $diferenca);
+        $this->tempoVida = ceil($this->aptidao * ($geracoes / 100));
         $this->idade = $this->tempoVida;
     }
 

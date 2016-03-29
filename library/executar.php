@@ -11,19 +11,17 @@ if ($_POST) {
 
     $algoritimoGenetico->gerarPopulacaoInicial();
 
-    while ($algoritimoGenetico->quantidadeGeracoes > 0 && count($algoritimoGenetico->populacao) > 0) {
+    $geracoes = $algoritimoGenetico->quantidadeGeracoes;
+
+    while ($geracoes > 0 && count($algoritimoGenetico->populacao) > 0) {
 
         $algoritimoGenetico->gerarNovaPopulacao();
         $algoritimoGenetico->atualizarVidaPopulacao();
 
-        $melhorUltimoCromossomo = $algoritimoGenetico->getMelhorCromossomo();
-
-        if ($melhorUltimoCromossomo !== null) {
-            $melhorCromossomo = $melhorUltimoCromossomo;
-        }
-
-        $algoritimoGenetico->quantidadeGeracoes--;
+        $geracoes--;
     }
+
+    $melhorCromossomo = $algoritimoGenetico->getMelhorCromossomo();
 
     $fimExecucao = date('Y-m-d H:i:s');
     Log::escreveArquivo($inicioExecucao, $fimExecucao, $melhorCromossomo, $_POST);

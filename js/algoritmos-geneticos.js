@@ -35,7 +35,7 @@ $(function () {
         exibeEstado(response.vetor);
         modalAviso("<b>Melhor Cromossomo:</b>",
                    "<b>Volume: </b>" + response.volume + ". <b>Peso: </b>" + response.peso + ". <b>Valor: </b>" + response.valor + ". <br />" +
-                   "<b>Geração: </b>" + response.geracao + ". <b>Tempo de Vida: </b>" + response.tempoVida + ". <br />" +
+                   "<b>Criado na Geração: </b>" + response.geracao + ". <b>Tempo de Vida: </b>" + response.tempoVida + ". <br />" +
                    "<b>É mutante: </b>" + mutante + ".");
         $("#volume").text(response.volume);
         $("#peso").text(response.peso);

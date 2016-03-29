@@ -23,7 +23,7 @@ class Log {
         $texto .= "Volume: ".$melhorCromossomo->getVolume().". ";
         $texto .= "Peso: ".$melhorCromossomo->getPeso().". ";
         $texto .= "Valor: ".$melhorCromossomo->getValor().".\n";
-        $texto .= "Geração: ".$melhorCromossomo->getGeracao().". ";
+        $texto .= "Criado na Geração: ".$melhorCromossomo->getGeracao().". ";
         $texto .= "Tempo de Vida: ".$melhorCromossomo->getTempoVida()." Gerações.\n";
         $texto .= "É mutante: ".$mutante."\n";
         $texto .= "Parâmetros: \n";

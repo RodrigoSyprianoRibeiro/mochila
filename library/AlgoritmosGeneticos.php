@@ -38,7 +38,7 @@ class AlgoritmosGeneticos {
             $cromossomo = new Cromossomo($this->geracaoAtual);
             $cromossomo->gerarVetor($tamanhoListaArtigos);
             $cromossomo->calcularValores($this->listaArtigos);
-            $cromossomo->calcularAptidaoTempoVida();
+            $cromossomo->calcularAptidaoTempoVida($this->quantidadeGeracoes);
             array_push($this->populacao, $cromossomo);
         }
     }
@@ -66,13 +66,18 @@ class AlgoritmosGeneticos {
     }
 
     public function geraPopulacaoCrossover() {
-        $tamanhoPopulacao = count($this->populacao);
-        $quantidadeCrossover = ceil($tamanhoPopulacao * $this->quantidadeCrossover);
+        $quantidadeCrossover = round(count($this->populacao) * $this->quantidadeCrossover);
         $totalCrossover = ($quantidadeCrossover % 2 == 0) ? $quantidadeCrossover : $quantidadeCrossover - 1;
+
         $populacaoCrossover = array();
-        foreach (Util::gerarNumerosAleatoriosDiferentes(0, $tamanhoPopulacao - 1, $totalCrossover, 'DESC') AS $numero) {
-            array_push($populacaoCrossover, $this->populacao[$numero]);
-            unset($this->populacao[$numero]);
+        while ($totalCrossover > 0) {
+
+            $numeroAleatorio = rand(0, count($this->populacao)-1);
+            array_push($populacaoCrossover, $this->populacao[$numeroAleatorio]);
+            unset($this->populacao[$numeroAleatorio]);
+            sort($this->populacao);
+
+            $totalCrossover--;
         }
         return $populacaoCrossover;
     }
@@ -96,10 +101,10 @@ class AlgoritmosGeneticos {
         }
 
         $cromossomoFilho1->calcularValores($this->listaArtigos);
-        $cromossomoFilho1->calcularAptidaoTempoVida();
+        $cromossomoFilho1->calcularAptidaoTempoVida($this->quantidadeGeracoes);
 
         $cromossomoFilho2->calcularValores($this->listaArtigos);
-        $cromossomoFilho2->calcularAptidaoTempoVida();
+        $cromossomoFilho2->calcularAptidaoTempoVida($this->quantidadeGeracoes);
 
         array_push($this->populacao, $cromossomoFilho1);
         array_push($this->populacao, $cromossomoFilho2);
@@ -119,7 +124,7 @@ class AlgoritmosGeneticos {
             $cromossomo->vetor[$numero] = $cromossomo->vetor[$numero] == 1 ? 0 : 1;
         }
         $cromossomo->calcularValores($this->listaArtigos);
-        $cromossomo->calcularAptidaoTempoVida();
+        $cromossomo->calcularAptidaoTempoVida($this->quantidadeGeracoes);
         $cromossomo->setMutante(true);
     }
 
@@ -135,11 +140,12 @@ class AlgoritmosGeneticos {
     public function getMelhorCromossomo() {
         if (count($this->populacao) > 0) {
             $this->ordenarPopulacaoMaiorMenor();
-            foreach ($this->populacao AS $cromossomo) {
-                if ($cromossomo->getVolume() <= $cromossomo::VOLUME_MAXIMO && $cromossomo->getPeso() <= $cromossomo::PESO_MAXIMO) {
-                    return $cromossomo;
-                }
-            }
+//            foreach ($this->populacao AS $cromossomo) {
+//                if ($cromossomo->getVolume() <= $cromossomo::VOLUME_MAXIMO && $cromossomo->getPeso() <= $cromossomo::PESO_MAXIMO) {
+//                    return $cromossomo;
+//                }
+//            }
+            return $this->populacao[0];
         }
         return null;
     }
