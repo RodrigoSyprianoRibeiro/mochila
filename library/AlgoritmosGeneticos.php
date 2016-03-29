@@ -140,12 +140,11 @@ class AlgoritmosGeneticos {
     public function getMelhorCromossomo() {
         if (count($this->populacao) > 0) {
             $this->ordenarPopulacaoMaiorMenor();
-//            foreach ($this->populacao AS $cromossomo) {
-//                if ($cromossomo->getVolume() <= $cromossomo::VOLUME_MAXIMO && $cromossomo->getPeso() <= $cromossomo::PESO_MAXIMO) {
-//                    return $cromossomo;
-//                }
-//            }
-            return $this->populacao[0];
+            foreach ($this->populacao AS $cromossomo) {
+                if ($cromossomo->getVolume() <= $cromossomo::VOLUME_MAXIMO && $cromossomo->getPeso() <= $cromossomo::PESO_MAXIMO) {
+                    return $cromossomo;
+                }
+            }
         }
         return null;
     }
