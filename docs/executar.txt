@@ -1,0 +1,22 @@
+require_once('AlgoritmosGeneticos.php');
+
+if ($_POST) {
+
+    $algoritimoGenetico = new AlgoritmosGeneticos($_POST);
+
+    $algoritimoGenetico->gerarPopulacaoInicial();
+
+    $geracoes = $algoritimoGenetico->quantidadeGeracoes;
+
+    while ($geracoes > 0 && count($algoritimoGenetico->populacao) > 0) {
+
+        $algoritimoGenetico->gerarNovaPopulacao();
+        $algoritimoGenetico->atualizarVidaPopulacao();
+
+        $geracoes--;
+    }
+
+    $melhorCromossomo = $algoritimoGenetico->getMelhorCromossomo();
+
+    echo json_encode($melhorCromossomo);
+}

@@ -1,5 +1,3 @@
-<?php
-
 class Util
 {
     public static function gerarListaArtigos() {

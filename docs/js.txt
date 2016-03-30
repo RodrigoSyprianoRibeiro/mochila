@@ -3,15 +3,15 @@ $(function () {
   montaMochila();
 
   function montaMochila() {
-    var html = "<table id='mochila'>";
+    var html = "&lt;table id='mochila'&gt;";
     for (y = 0; y < 5; y++) {
-      html += "<tr>";
+      html += "&lt;tr&gt;";
       for (x = 0; x < 5; x++) {
-        html += "<td class='celula'></td>";
+        html += "&lt;td class='celula'&gt;&lt;/td&gt;";
       }
-      html += "</tr>";
+      html += "&lt;/tr&gt;";
     }
-    html += "</table>";
+    html += "&lt;/table&gt;";
     $("#quadro").html(html);
     rainhas = [];
   };
@@ -33,22 +33,19 @@ $(function () {
       success: function(response) {
         var mutante = response.mutante ? 'Sim' : 'Não';
         exibeEstado(response.vetor);
-        modalAviso("<b>Melhor Cromossomo:</b>",
-                   "<b>Volume: </b>" + response.volume + ". <b>Peso: </b>" + response.peso + ". <b>Valor: </b>" + response.valor + ". <br />" +
-                   "<b>Criado na Geração: </b>" + response.geracao + ". <b>Tempo de Vida: </b>" + response.tempoVida + ". <br />" +
-                   "<b>É mutante: </b>" + mutante + ".");
+        modalAviso("&lt;b&gt;Melhor Cromossomo:&lt;/b&gt;",
+                   "&lt;b&gt;Volume: &lt;/b&gt;" + response.volume + ". &lt;b&gt;Peso: &lt;/b&gt;" + response.peso + ". &lt;b&gt;Valor: &lt;/b&gt;" + response.valor + ". &lt;br /&gt;" +
+                   "&lt;b&gt;Criado na Geração: &lt;/b&gt;" + response.geracao + ". &lt;b&gt;Tempo de Vida: &lt;/b&gt;" + response.tempoVida + ". &lt;br /&gt;" +
+                   "&lt;b&gt;É mutante: &lt;/b&gt;" + mutante + ".");
         $("#volume").text(response.volume);
         $("#peso").text(response.peso);
         $("#valor").text(response.valor);
-        carregaLog();
       },
       beforeSend: function(){
         desabilitaBotoes();
-        abreModalCarregando();
       },
       complete: function(){
         habilitaBotoes();
-        fechaModalCarregando();
       }
     });
   };
@@ -83,7 +80,7 @@ $(function () {
     var count = 65;
     $(".celula").each(function(index) {
       texto = (vetor[index] === 1) ? String.fromCharCode(count) : ' - ';
-      $(this).html('<span title="'+listaArtigos[index][0]+' = {Volume = '+listaArtigos[index][1]+'. Peso = '+listaArtigos[index][2]+'. Valor = '+listaArtigos[index][3]+'.}">'+texto+'</span>');
+      $(this).html('&lt;span title="'+listaArtigos[index][0]+' = {Volume = '+listaArtigos[index][1]+'. Peso = '+listaArtigos[index][2]+'. Valor = '+listaArtigos[index][3]+'.}"&gt;'+texto+'&lt;/span&gt;');
       count++;
     });
   }
@@ -113,36 +110,16 @@ $(function () {
 
   function modalAviso(titulo, mensagem) {
     bootbox.dialog({
-      title: "<h3 class='smaller lighter no-margin'>"+titulo+"</h3>",
+      title: "&lt;h3 class='smaller lighter no-margin'&gt;"+titulo+"&lt;/h3&gt;",
       message: mensagem,
       buttons: {
         danger: {
-          label: "<i class='ace-icon fa fa-times'></i> Fechar",
+          label: "&lt;i class='ace-icon fa fa-times'&gt;&lt;/i&gt; Fechar",
           className: "btn btn-sm btn-danger pull-right"
         }
       }
     });
   }
-
-  function abreModalCarregando() {
-    $('html, body').animate({ scrollTop: $("body").offset().top }, 'slow');
-    var id = '.carregando';
-    var maskHeight = $(document).height();
-    var maskWidth = $(window).width();
-    $('#mask').css({'width':maskWidth,'height':maskHeight});
-    $('#mask').fadeIn(1000);
-    $('#mask').fadeTo("slow",0.8);
-    var winH = $(window).height();
-    var winW = $(window).width();
-    $(id).css('top',  winH/2-$(id).height()/2);
-    $(id).css('left', winW/2-$(id).width()/2);
-    $(id).fadeIn(2000);
-  };
-
-  function fechaModalCarregando() {
-    $('#mask').hide();
-    $('.window').hide();
-  };
 
   $("#populacao_inicial").ionRangeSlider({
     min: 0,
@@ -186,12 +163,4 @@ $(function () {
     prettify: false,
     hasGrid: true
   });
-
-  carregaLog();
-
-  function carregaLog() {
-    jQuery.get('log.txt', function(data) {
-      $('#log').html(data.replace('n',''));
-    });
-  };
 });
